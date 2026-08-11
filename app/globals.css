@@ -1,0 +1,161 @@
+/* app/globals.css */
+@import "tailwindcss";
+
+/*
+  ORYOC design tokens.
+  Palette grounded in Moroccan zellige craft rather than a generic dark
+  theme: warm near-black base, brass/gold for trust & premium moments,
+  a deep tile-teal as the secondary accent. Dark is the only theme —
+  see product spec §7 ("dark-first, pas une option secondaire").
+*/
+:root {
+  --color-ink: #0b0d0e;
+  --color-ink-raised: #121517;
+  --color-surface: #15181b;
+  --color-surface-raised: #1c2024;
+  --color-line: #262a2e;
+  --color-line-soft: #1e2124;
+
+  --color-brass: #c9a15a;
+  --color-brass-bright: #ddb975;
+  --color-brass-dim: #8a6f3f;
+
+  --color-zellige: #2f6e62;
+  --color-zellige-bright: #3fa391;
+
+  --color-paper: #f3efe7;
+  --color-mist: #9498a0;
+  --color-mist-dim: #6b6f76;
+
+  --color-alert: #c1554a;
+  --color-alert-bright: #d97b6f;
+
+  --shadow-gold-glow: 0 0 0 1px rgba(201, 161, 90, 0.16), 0 12px 40px -12px rgba(201, 161, 90, 0.28);
+  --shadow-lift: 0 20px 60px -20px rgba(0, 0, 0, 0.6);
+
+  --radius-pill: 999px;
+  --radius-card: 22px;
+  --radius-control: 12px;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-raised: var(--color-ink-raised);
+  --color-surface: var(--color-surface);
+  --color-surface-raised: var(--color-surface-raised);
+  --color-line: var(--color-line);
+  --color-brass: var(--color-brass);
+  --color-brass-bright: var(--color-brass-bright);
+  --color-brass-dim: var(--color-brass-dim);
+  --color-zellige: var(--color-zellige);
+  --color-zellige-bright: var(--color-zellige-bright);
+  --color-paper: var(--color-paper);
+  --color-mist: var(--color-mist);
+  --color-mist-dim: var(--color-mist-dim);
+  --color-alert: var(--color-alert);
+  --color-alert-bright: var(--color-alert-bright);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+
+  --radius-pill: var(--radius-pill);
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(201, 161, 90, 0.32);
+  color: var(--color-paper);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Hairline zellige-inspired divider: a thin repeating chevron, used
+   sparingly as a section rule rather than a plain <hr>. */
+.divider-zellige {
+  height: 1px;
+  width: 100%;
+  background-image: linear-gradient(
+    135deg,
+    var(--color-line) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--color-line) 50%,
+    var(--color-line) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 10px 10px;
+  opacity: 0.6;
+}
+
+.card-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+.glow-brass {
+  box-shadow: var(--shadow-gold-glow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility, kept deliberate rather than the browser default. */
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar, quiet on dark surfaces */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-raised);
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+}
+
+/* Leaflet map container needs an explicit height and dark chrome */
+.map-view-container {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.leaflet-container {
+  background: var(--color-surface) !important;
+  font-family: var(--font-sans) !important;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--color-surface-raised) !important;
+  color: var(--color-paper) !important;
+}
