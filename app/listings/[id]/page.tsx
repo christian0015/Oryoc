@@ -41,6 +41,7 @@ export default async function ListingDetailPage({
     const fav = await FavoriteModel.findOne({ userId: session.user.id, targetType: "listing", targetId: id });
     isFavorited = Boolean(fav);
   }
-
-  return <ListingDetailView listing={res.data} isOwner={isOwner} initialFavorited={isFavorited} />;
+  // Convertit le document Mongoose complexe en objet JSON pur
+  const plainListing = JSON.parse(JSON.stringify(res.data));
+  return <ListingDetailView listing={plainListing} isOwner={isOwner} initialFavorited={isFavorited} />;
 }
