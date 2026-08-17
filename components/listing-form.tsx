@@ -48,7 +48,7 @@ export function ListingForm() {
   const [error, setError] = useState<string | null>(null);
 
   async function handleLocate() {
-    if (!address.trim() || !city.trim()) {
+    if (!address.trim() && !city.trim()) {
       setError("Renseigne au moins l'adresse et la ville avant de localiser");
       return;
     }
